@@ -1,10 +1,7 @@
-# ETH-blockchainProject
-
-durk card game on ETH test network build with smartcontract
-
 # Durak Game
 
-A card game project developed with React, simulating the classic Russian card game Durak. Now hosted on GitHub Pages!
+A card game project developed with React, simulating the classic Russian card game Durak With The use of ETH blockchain test Network and implmentation of smart contract. Now hosted on GitHub Pages!
+https://subzerox9.github.io/durak-game/
 
 ## Table of Contents
 
