@@ -22,7 +22,7 @@ Before starting, make sure you have Node.js and npm installed on your computer.
 To install the project:
 
 1. Clone the repository:
-   git clone https://github.com/SubZeroX9/ETH-blockchainProject
+   git clone https://github.com/SubZeroX9/durak-game.git
 
 2. Install the project dependencies:
    cd durak-card-game
