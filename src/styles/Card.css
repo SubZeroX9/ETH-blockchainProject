@@ -1,0 +1,46 @@
+.card {
+    width: 80px;
+    height: 120px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    position: relative;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card.hearts, .card.diamonds {
+    color: red;
+}
+
+.card-corner {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.card-corner .card-value {
+    font-size: 20px;
+}
+
+.card-corner .card-suit {
+    font-size: 15px;
+}
+
+.top-left {
+    top: 2px;
+    left: 2px;
+}
+
+.bottom-right {
+    bottom: 2px;
+    right: 2px;
+    transform: rotate(180deg);
+}
+
+.face-card {
+    /* background-image: url('path-to-face-card-image'); */
+    background-repeat: no-repeat;
+    background-size: contain;
+}
