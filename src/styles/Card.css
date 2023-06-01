@@ -1,12 +1,17 @@
 .card {
-    width: 80px;
-    height: 120px;
+    margin: 10px;
+    width: 120px;
+    height: 200px;
     border-radius: 5px;
     background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     position: relative;
     color: black;
     font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card.hearts, .card.diamonds {
@@ -14,10 +19,13 @@
 }
 
 .card-corner {
-    width: 20px;
-    height: 20px;
     position: absolute;
-    overflow: hidden;
+    width: 20px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-corner .card-value {
@@ -25,52 +33,80 @@
 }
 
 .card-corner .card-suit {
-    font-size: 15px;
+    font-size: 30px;
 }
 
 .top-left {
-    top: 2px;
-    left: 2px;
+    top: 6%;
+    left: 2%;
 }
 
 .bottom-right {
-    bottom: 2px;
-    right: 2px;
+    bottom: 6%;
+    right: 2%;
     transform: rotate(180deg);
 }
 
-.face-card.hearts {
-    background-image: url('path-to-hearts-face-card-image'); /*add face card image*/
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.face-card.diamonds {
-    background-image: url('path-to-diamonds-face-card-image');/*add face card image*/
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.face-card.spades {
-    background-image: url('path-to-spades-face-card-image');/*add face card image*/
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.face-card.clubs {
-    background-image: url('path-to-clubs-face-card-image');/*add face card image*/
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
 .card-back {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/Playing\ Card\ Back\ Durak.png') no-repeat center;
+    background-size: 240px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    backface-visibility: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-middle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-middle-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+
+
+.card-middle-container.rank-6-8 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.card-middle-suit.rank-6-8, .card-middle-suit.rank-9-10{
+    font-size: 45px;
+}
+
+.card-middle-suit {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('/path-to-your-image/card-back.jpg'); /*add back of the card image*/
-    background-size: cover; /* Ensures the image covers the entire card */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    border-radius: 8px;
-    border: 2px solid black;
-    backface-visibility: hidden;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
+
+.card-middle-container.rank-9-10 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.face-card-img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
