@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Card.css';
 
-const Card = ({ rank, suit, isFaceUp, index }) => {
+const Card = ({ rank, suit, isFaceUp, index, depth }) => {
 
     const getSuit = (suit) => {
         switch(suit) {
@@ -38,8 +38,17 @@ const Card = ({ rank, suit, isFaceUp, index }) => {
         return symbols;
     }
 
+    // const cardStyle = {
+    //     zIndex: -index,
+    //     transform: `translateZ(-${depth}em)`,
+    // }
+
     return (
-        <div className={`card ${suit} ${isFaceCard ? 'face-card' : ''}`} data-index={index}>
+        <div 
+            className={`card ${suit} ${isFaceCard ? 'face-card' : ''}`} 
+            data-index={index}
+            style={{ transform: `translateZ(-${depth}em)` }}  // Add depth to card
+        >
             {isFaceUp ? (
                 <>
                     <div className="card-corner top-left">

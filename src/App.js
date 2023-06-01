@@ -1,17 +1,22 @@
 import React from 'react';
 import './styles/App.css';
 import Card from './components/Card'; // make sure the path to the Card component is correct
+import Deck from './components/Deck'; // make sure the path to the Deck component is correct
 
 function App() {
   return (
     <div >
-      <main className='test'>
+      {/* <main className='test'>
         <Card rank="A" suit="hearts" isFaceUp={true} />
         <Card rank="K" suit="diamonds" isFaceUp={true} />
         <Card rank="Q" suit="spades" isFaceUp={true} />
         <Card rank="J" suit="clubs" isFaceUp={false} />
         <Card rank="6" suit="hearts" isFaceUp={true} />
-      </main>
+      </main> */}
+
+      <div>
+        <Deck />
+      </div>
     </div>
   );
 }
