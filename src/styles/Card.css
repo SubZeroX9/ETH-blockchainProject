@@ -2,6 +2,7 @@
     margin: 10px;
     width: 120px;
     height: 200px;
+    max-width: 120px;
     border-radius: 5px;
     background: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -12,6 +13,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.3s ease;
 }
 
 .card.hearts, .card.diamonds {
