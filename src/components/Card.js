@@ -18,36 +18,60 @@ const Card = ({ rank, suit, isFaceUp, index, depth }) => {
         }
     }
 
-    const isFaceCard = ['J', 'Q', 'K', 'A'].includes(rank);
+    const isFaceCard = ['J', 'Q', 'K'].includes(rank);
     const suitSymbol = getSuit(suit);
-
-    const rankClass = ['6', '7', '8'].includes(rank) 
-        ? 'rank-6-8' 
-        : ['9', '10'].includes(rank) 
-            ? 'rank-9-10' 
-            : '';
 
     const generateSuitSymbols = () => {
         let symbols = [];
-        if (['A', '6', '7', '8', '9', '10'].includes(rank)) {
-            const numericRank = rank === 'A' ? 1 : parseInt(rank, 10);
-            for(let i = 0; i < numericRank; i++) {
-                symbols.push(<div key={i} className={`card-middle-suit ${rankClass}`}>{suitSymbol}</div>);
+        const ranks = ['6', '7', '8', '9', '10'];
+        if (ranks.includes(rank)) {
+            const numericRank = parseInt(rank, 10);
+            let halfwayPoint;
+            switch (numericRank) {
+                case 6:
+                    halfwayPoint = 4;
+                    break;
+                case 7:
+                    halfwayPoint = 5;
+                    break;
+                case 8:
+                    halfwayPoint = 4;
+                    break;
+                default:
+                    halfwayPoint = 5;
+                    break;
             }
+            for(let i = 0; i < numericRank; i++) {
+                let suitClass = i < halfwayPoint ? 'suit-normal' : 'suit-rotated';
+                symbols.push(
+                    <div
+                        key={i}
+                        className={`card-middle-suit ${suitClass}`}
+                        style={{ gridArea: 'suit'+(i+1) }}
+                    >
+                        {suitSymbol}
+                    </div>
+                );
+            }
+        } else if(rank === 'A') {
+            symbols.push(
+                <div
+                    key={0}
+                    className={`suit-normal`}
+                >
+                    {suitSymbol}
+                </div>
+            );
         }
+
         return symbols;
     }
-
-    // const cardStyle = {
-    //     zIndex: -index,
-    //     transform: `translateZ(-${depth}em)`,
-    // }
-
+    
     return (
         <div 
-            className={`card ${suit} ${isFaceCard ? 'face-card' : ''}`} 
+            className={`card ${suit} ${isFaceCard ? `face-card-${rank}` : ''}`} 
             data-index={index}
-            style={{ transform: `translateZ(-${depth}em)` }}  // Add depth to card
+            style={{ transform: `translateZ(-${depth}em)` }} 
         >
             {isFaceUp ? (
                 <>
@@ -55,7 +79,7 @@ const Card = ({ rank, suit, isFaceUp, index, depth }) => {
                         <div className="card-value">{rank}</div>
                         <div className="card-suit">{suitSymbol}</div>
                     </div>
-                    <div className="card-middle-container">
+                    <div className={`card-middle-container rank-${rank}`}>
                         {generateSuitSymbols()}
                     </div>
                     <div className="card-corner bottom-right">
@@ -64,9 +88,7 @@ const Card = ({ rank, suit, isFaceUp, index, depth }) => {
                     </div>
                 </>
             ) : (
-                <div className="card-back"> 
-                    {/* Here you can add the design or an image for the back of the card. */}
-                </div>
+                <div className="card-back"></div>
             )}
         </div>
     );

@@ -33,7 +33,7 @@
 }
 
 .card-corner .card-suit {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .top-left {
@@ -73,40 +73,86 @@
     align-items: center;
     flex-grow: 1;
     width: 100%;
+    height: 100%;
 }
 
+.rank-A{
+    font-size: 125px;
+}
 
-
-.card-middle-container.rank-6-8 {
+.card-middle-container.rank-6,
+.card-middle-container.rank-7,
+.card-middle-container.rank-8,
+.card-middle-container.rank-9,
+.card-middle-container.rank-10 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 0.2fr);
+    grid-template-rows: repeat(6, minmax(0, 1fr));
 }
 
-.card-middle-suit.rank-6-8, .card-middle-suit.rank-9-10{
-    font-size: 45px;
+.card-middle-container.rank-6{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      .          ."
+    "suit3   .       suit4"
+    ".      .          ."
+    ".      .          ."
+    "suit5   .       suit6";
 }
+
+.card-middle-container.rank-7{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    ".      .          ."
+    ".      .          ."
+    "suit6   .       suit7";
+}
+
+.card-middle-container.rank-8{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      .          ."
+    "suit3   .       suit4"
+    "suit5   .       suit6"
+    ".      .          ."
+    "suit7   .       suit8";
+    grid-template-rows: 1fr 0.5fr 1fr 1fr 0.5fr 1fr;
+}
+
+.card-middle-container.rank-9{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    "suit6   .       suit7"
+    ".      .          ."
+    "suit8   .       suit9";
+}
+
+.card-middle-container.rank-10{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    "suit6   .       suit7"
+    ".      suit8       ."
+    "suit9   .       suit10";
+}
+
 
 .card-middle-suit {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
+    font-size: 40px;
+    width: 100%; /* specify width */
+    height: 100%; /* specify height */
+    object-fit: contain;
 }
 
-.card-middle-container.rank-9-10 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+.suit-rotated {
+    transform: rotate(180deg) translateY(-5px);
 }
 
-.face-card-img {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+.suit-normal {
+    transform: translateY(-5x);
 }
