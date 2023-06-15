@@ -1,0 +1,190 @@
+.card {
+    margin: 10px;
+    width: 120px;
+    height: 200px;
+    max-width: 120px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.card.hearts, .card.diamonds {
+    color: red;
+}
+
+.card-corner {
+    position: absolute;
+    width: 20px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-corner .card-value {
+    font-size: 20px;
+}
+
+.card-corner .card-suit {
+    font-size: 20px;
+}
+
+.top-left {
+    top: 6%;
+    left: 2%;
+}
+
+.bottom-right {
+    bottom: 6%;
+    right: 2%;
+    transform: rotate(180deg);
+}
+
+.card-back {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/Playing\ Card\ Back\ Durak.png') no-repeat center;
+    background-size: 240px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    backface-visibility: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-middle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-middle-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.rank-A{
+    font-size: 125px;
+}
+
+.card-middle-container.rank-6,
+.card-middle-container.rank-7,
+.card-middle-container.rank-8,
+.card-middle-container.rank-9,
+.card-middle-container.rank-10 {
+    display: grid;
+    grid-template-columns: repeat(3, 0.2fr);
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+}
+
+.card-middle-container.rank-6{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      .          ."
+    "suit3   .       suit4"
+    ".      .          ."
+    ".      .          ."
+    "suit5   .       suit6";
+}
+
+.card-middle-container.rank-7{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    ".      .          ."
+    ".      .          ."
+    "suit6   .       suit7";
+}
+
+.card-middle-container.rank-8{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      .          ."
+    "suit3   .       suit4"
+    "suit5   .       suit6"
+    ".      .          ."
+    "suit7   .       suit8";
+    grid-template-rows: 1fr 0.5fr 1fr 1fr 0.5fr 1fr;
+}
+
+.card-middle-container.rank-9{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    "suit6   .       suit7"
+    ".      .          ."
+    "suit8   .       suit9";
+}
+
+.card-middle-container.rank-10{
+    grid-template-areas: 
+    "suit1   .       suit2"
+    ".      suit3       ."
+    "suit4   .       suit5"
+    "suit6   .       suit7"
+    ".      suit8       ."
+    "suit9   .       suit10";
+}
+
+
+.card-middle-suit {
+    font-size: 40px;
+    width: 100%; /* specify width */
+    height: 100%; /* specify height */
+    object-fit: contain;
+}
+
+.suit-rotated {
+    transform: rotate(180deg) translateY(-5px);
+}
+
+.suit-normal {
+    transform: translateY(-5x);
+}
+
+.face-card-K.hearts,.face-card-K.diamonds{
+    background: url('../assets/images/RedKing.png') no-repeat center;
+    background-size: cover;
+}
+
+.face-card-K.clubs,.face-card-K.spades{
+    background: url('../assets/images/BlackKing.png') no-repeat center;
+    background-size: cover;
+}
+
+.face-card-Q.hearts,.face-card-Q.diamonds{
+    background: url('../assets/images/RedQueen.png') no-repeat center;
+    background-size: cover;
+}
+
+.face-card-Q.clubs,.face-card-Q.spades{
+    background: url('../assets/images/BlackQueen.png') no-repeat center;
+    background-size: cover;
+}
+
+.face-card-J.hearts,.face-card-J.diamonds{
+    background: url('../assets/images/RedJack.png') no-repeat center;
+    background-size: cover;
+}
+
+.face-card-J.clubs,.face-card-J.spades{
+    background: url('../assets/images/BlackJack.png') no-repeat center;
+    background-size: cover;
+}

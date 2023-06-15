@@ -1,0 +1,11 @@
+.hand {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.player-hand .card:hover {
+    transform: scale(1.1)!important;
+}
