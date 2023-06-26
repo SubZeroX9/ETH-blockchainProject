@@ -9,13 +9,16 @@ body{
     text-align: center;
 }
 
-.text{
+.Menu{
     color: white;
     font-size: 60px;
     font-family: Lucida Handwriting ;
     text-shadow: 2px 2px 10px green;
     font-weight: bold;
+    margin-top: 30px;
 }
+
+
 .tab{
     tab-size:20;
     color: white;
@@ -28,6 +31,7 @@ body{
 .dividers{
     border-top: 4px solid #001a00;
     border-radius: 5px;
+    margin: 75px;
 }
 
 .select{
