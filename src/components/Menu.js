@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import '../styles/Menu.css';
+import { Link } from 'react-router-dom'
 import  Wallet  from './Wallet';
+import Board from './Board';
 
 
 const Menu = () => {
@@ -20,7 +22,9 @@ const Menu = () => {
                 <option value="6" className='selected'>6</option>
                 </select>
                 <hr className='dividers'></hr>
-                <button className='button'>Start Game</button>
+                <button className='button'>
+                    <Link to="/board">Start Game</Link>
+                </button>
                 <hr className='dividers'></hr>
                     <a>No. of tokens</a>    
             </div>
