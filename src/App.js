@@ -1,9 +1,10 @@
 import React from 'react';
 import './styles/App.css';
 import Menu from './components/Menu'; // Update the path to the Menu component if necessary
-import Card from './components/Card'; // make sure the path to the Card component is correct
 import Deck from './components/Deck'; // make sure the path to the Deck component is correct
 import Hand from './components/Hand'; // make sure the path to the Hand component is correct
+import Board from './components/Board'; // make sure the path to the Hand component is correct
+
 
 function App() {
   const cards = [
@@ -15,9 +16,7 @@ function App() {
     // Add more cards as needed
   ];
   return (
-    <div >
-        <Menu/>
-    </div>
+    <Board />
   );
 }
 

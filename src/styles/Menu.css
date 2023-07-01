@@ -1,4 +1,4 @@
-body{
+body{    
     background: url('../assets/images/menuBackground.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,7 +15,6 @@ body{
     font-family: Lucida Handwriting ;
     text-shadow: 2px 2px 10px green;
     font-weight: bold;
-    margin-top: 30px;
 }
 
 
@@ -31,7 +30,7 @@ body{
 .dividers{
     border-top: 4px solid #001a00;
     border-radius: 5px;
-    margin: 75px;
+    margin: 72px;
 }
 
 .select{

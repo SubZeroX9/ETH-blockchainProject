@@ -162,29 +162,40 @@
 .face-card-K.hearts,.face-card-K.diamonds{
     background: url('../assets/images/RedKing.png') no-repeat center;
     background-size: cover;
+    background-color: white;
+
 }
 
 .face-card-K.clubs,.face-card-K.spades{
     background: url('../assets/images/BlackKing.png') no-repeat center;
     background-size: cover;
+    background-color: white;
+
 }
 
 .face-card-Q.hearts,.face-card-Q.diamonds{
     background: url('../assets/images/RedQueen.png') no-repeat center;
     background-size: cover;
+    background-color: white;
+
 }
 
 .face-card-Q.clubs,.face-card-Q.spades{
     background: url('../assets/images/BlackQueen.png') no-repeat center;
     background-size: cover;
+    background-color: white;
+
 }
 
 .face-card-J.hearts,.face-card-J.diamonds{
     background: url('../assets/images/RedJack.png') no-repeat center;
     background-size: cover;
+    background-color: white;
+
 }
 
 .face-card-J.clubs,.face-card-J.spades{
     background: url('../assets/images/BlackJack.png') no-repeat center;
     background-size: cover;
+    background-color: white;
 }
