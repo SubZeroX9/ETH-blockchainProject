@@ -6,29 +6,47 @@ import Board from './Board';
 
 
 const Menu = () => {
-        const [errorMessage, setErrorMessage] = useState(null);
-        
-        return(
-            <div className="Menu">
-                <Wallet/>
-                <hr className='dividers'></hr>
-                <a>How Many Players </a>
-                <select className='select'>
-                <option value="0" className='selected'>→ Select ←</option>
-                <option value="2" className='selected'>2</option>
-                <option value="3" className='selected'>3</option>
-                <option value="4" className='selected'>4</option>
-                <option value="5" className='selected'>5</option>
-                <option value="6" className='selected'>6</option>
-                </select>
-                <hr className='dividers'></hr>
-                <button className='button'>
-                    <Link to="/board">Start Game</Link>
-                </button>
-                <hr className='dividers'></hr>
-                    <a>No. of tokens</a>    
-            </div>
-        )
-}
+    const [playerCount, setPlayerCount] = useState(0);
+
+    const handlePlayerCountChange = (e) => {
+      setPlayerCount(Number(e.target.value));
+    };
+  
+    const renderStartButton = () => {
+        if (playerCount > 0) {
+          return (
+            <button className='button'>
+              <Link to="/board">Start Game</Link>
+            </button>
+          );
+        } else {
+          return (
+            <button className='button' onClick={() => alert('Add minimum players')}>
+              Start Game
+            </button>
+          );
+        }
+      };
+  
+    return (
+      <div className="Menu">
+        <Wallet />
+        <hr className='dividers' />
+        <a>How Many Players</a>
+        <select className='select' onChange={handlePlayerCountChange}>
+          <option value="0">→ Select ←</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <hr className='dividers' />
+        {renderStartButton()}
+        <hr className='dividers' />
+        <a>No. of tokens</a>
+      </div>
+    );
+  };
 
 export default Menu;
