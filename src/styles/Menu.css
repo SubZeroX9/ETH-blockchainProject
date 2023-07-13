@@ -1,0 +1,69 @@
+body{    
+    background: url('../assets/images/menuBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.Menu{
+    color: white;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    text-shadow: 2px 2px 10px green;
+    font-weight: bold;
+}
+
+
+.tab{
+    tab-size:20;
+    color: white;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    text-shadow: 2px 2px 10px green;
+    font-weight: bold;
+}
+
+.dividers{
+    border-top: 4px solid #001a00;
+    border-radius: 5px;
+    margin: 72px;
+}
+
+.select{
+    size: 300px;
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 10px 40px 10px 40px;
+}
+
+.selected{
+    size: 300px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+}
+
+
+.button {
+    size: 300px;
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+  }
