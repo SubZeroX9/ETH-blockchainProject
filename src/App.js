@@ -21,6 +21,7 @@ function App() {
         <Route path="/" element = {<Menu />} />
         <Route path="/board" element = {<Board />} />
       </Routes>
+    <Board />
   );
 }
 
