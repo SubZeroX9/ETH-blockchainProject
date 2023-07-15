@@ -19,7 +19,7 @@ const Board = () => {
       ];
 
     return(
-        <div>
+        <div className='GameBoard'>
             <Hand initialCards={cards} isFaceUp={true} isPlayerHand={true}/>
             <Hand initialCards={cards} isFaceUp={false} isPlayerHand={false}/>
         </div>
