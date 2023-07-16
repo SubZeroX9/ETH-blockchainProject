@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Card.css';
 
-const Card = ({ rank, suit, isFaceUp, index, depth }) => {
+const Card = ({ rank, suit, isFaceUp, index=1, depth=1 }) => {
 
     const getSuit = (suit) => {
         switch(suit) {
