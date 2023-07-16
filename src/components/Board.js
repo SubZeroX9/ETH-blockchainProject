@@ -1,90 +1,97 @@
-import React, { useEffect, useState, useContext,useRef } from 'react';
+import React, { useReducer,useContext,useEffect,useRef } from 'react';
+import { deckReducer, DECKACTIONS } from '../reducers/deckReducer';
+import { gameLogicReducer, GAMELOGICACTION } from '../reducers/gameLogicReducer';
+import { playAreaReducer, PLAYAREAACTION } from '../reducers/playAreaReducer';
+import { playersReducer, PLAYERACTION } from '../reducers/playersReducer';
+import { getFirstAttacker } from '../utils/gameLogic';
+import { createDeck } from '../utils/deckUtils';
+import { GameContext } from './GameContext';
 import Player from './Player';
 import Card from './Card';
 import Deck from './Deck';
-import { createDeck, cardValue } from '../utils/deckUtils';
-import { GameContext } from './GameContext';
 import '../styles/Board.css';
 
+
+
 const Board = () => {
-  const initialized = useRef(false)
-  const { playerCount } = useContext(GameContext);
-  const [deck, setDeck] = useState([]);
-  const [kuzar, setKuzar] = useState(null);
-  const [players, setPlayers] = useState([]);
-  const [mainAtttacker, setMainAttacker] = useState(null);
-  const [currentAttacker, setCurrentAttacker] = useState(null);
-  const [defender, setDefender] = useState(null);
+    const { playerCount } = useContext(GameContext);
+    const initialized = useRef(false);
 
-  useEffect(() => {
-    if(initialized.current) return
-    const deck = createDeck();
-    setDeck(deck);
-    const initialPlayers = Array(playerCount).fill().map((_, idx) => ({
-      id: idx,
-      hand: [],
-      score: 0,
-    }));
-    setPlayers(initialPlayers);
-    initialized.current = true;
-  }, []); // The empty array causes this to only run once
+  // Initialize the state and dispatch for each reducer
+  const [deckState, deckDispatch] = useReducer(deckReducer, { deck: createDeck() , kuzar: null});
+  const [gameLogicState, gameLogicDispatch] = useReducer(gameLogicReducer, {});
+  const [playAreaState, playAreaDispatch] = useReducer(playAreaReducer, {attackCardsInPlay: [], defenseCardsInPlay: []});
+  const [playersState, playersDispatch] = useReducer(playersReducer, {players: []});
 
-  useEffect(() => {
-      if(!deck) return;
-      const kuzar = drawKuzar(deck);
-      setKuzar(kuzar);
-      dealInitialCards();
-      firstAttacker();
-  }, [deck]); // This runs after deck has been set
+    // Setup the game with initial values
+    useEffect(() => {
+        if(initialized.current) return
+        playersDispatch({ type: PLAYERACTION.INIT_PLAYERS, payload: playerCount });
+        initialized.current = true;
+    }, []);
 
-  const firstAttacker = () => {
-      // After dealing the cards, determine the starting player
-    const sortedPlayers = [...players].sort((a, b) => {
-      const aLowestCard = Math.min(...a.hand.map(card => cardValue(card)));
-      const bLowestCard = Math.min(...b.hand.map(card => cardValue(card)));
-      return aLowestCard - bLowestCard;
-    });
+    useEffect(() => {
+        if(!playersState.players.length) return;
+        console.log(playersState)
+        // // Use the new INIT_GAME action
+        deckDispatch({ 
+            type: DECKACTIONS.INIT_GAME, 
+            payload: { players: playersState.players, deck: deckState.deck } 
+        });
+        console.log(deckState)
+    },[playersState.players]);
 
-  // set the first player to be the one with the lowest kuzar
-    setMainAttacker(sortedPlayers[0]);
-    setCurrentAttacker(sortedPlayers[0]);
-    setDefender((sortedPlayers[0].id + 1) % playerCount);
-  }
+    useEffect(() => {
+        if(!deckState.kuzar) return;
+        console.log(deckState)
+        const firstAttacker = getFirstAttacker(playersState.players, deckState.kuzar.suit);
+        console.log("first attacker is: " + firstAttacker)
+        gameLogicDispatch({ type: GAMELOGICACTION.SET_MAIN_ATTACKER, payload: firstAttacker });
+        gameLogicDispatch({ type: GAMELOGICACTION.SET_CURRENT_ATTACKER, payload: firstAttacker });
+    }, [deckState]);
 
-  const drawKuzar = (deck) => {
-    return deck.pop();
-  }
-
-  const dealInitialCards = () => {
-    for (let i = 0; i < 6; i++) {
-      players.forEach(player => {
-        player.hand.push(deck.pop());
-      });
-    }
-  }
-
-  const updatePlayerHand = (playerId, newHand) => {
-    // find the player by id, update their hand and set the state
-    setPlayers(players.map(player => player.id === playerId ? {...player, hand: newHand} : player));
-  }
+  // your other codes go here
 
   return (
     <div className='gameBoard'>
-       {players.map(player => (
+      { playersState.players.map(player => (
         <Player 
           key={player.id} 
           player={player}
-          updatePlayerHand={updatePlayerHand}
           isPlayer={player.id === 0}
         />
       ))}
       <div className='mainDeck'>
-        { kuzar && <Card rank={kuzar.rank} suit={kuzar.suit} isFaceUp={true} /> }
-        <Deck deck={deck} className='deck' />
+        { deckState.kuzar && 
+          <Card 
+            rank={deckState.kuzar.rank} 
+            suit={deckState.kuzar.suit} 
+            isFaceUp={true} 
+          /> 
+        }
+        {deckState.deck && <Deck deck={deckState.deck} className='deck' />}
       </div>
-      <div className='playArea'></div>
+      <div className='playArea'>
+        { playAreaState.attackCardsInPlay.map(card => 
+          <Card 
+            key={card.id} 
+            rank={card.rank} 
+            suit={card.suit} 
+            isFaceUp={true} 
+          />) 
+        }
+        { playAreaState.defenseCardsInPlay.map(card => 
+          <Card 
+            key={card.id} 
+            rank={card.rank} 
+            suit={card.suit} 
+            isFaceUp={true} 
+          />) 
+        }
+      </div>
     </div>
   );
+  
 }
 
 export default Board;
