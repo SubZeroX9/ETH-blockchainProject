@@ -1,15 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//  <React.StrictMode>
-//    <App />
-//  </React.StrictMode>
-//  );
+// ReactDOM.render(
+//     <App />,
+//     // <React.StrictMode>
+//     //     <App />
+//     // </React.StrictMode>,
+//     document.getElementById('root')
+    
+// );
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(<App />);
