@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from './Card';
-import { createDeck } from '../utils/deckUtils';
 import '../styles/Deck.css';
 
-function Deck() {
-    const [deck, setDeck] = useState([]);
-
-    useEffect(() => {
-        setDeck(createDeck());
-    }, []);
-
+function Deck({ deck }) {
     return (
         <div className="deck">
             {deck.map((card, index) => (

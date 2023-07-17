@@ -1,6 +1,35 @@
-body{    
-    background: rgb(8, 27, 1);
-        align-items: center;
-    align-content: center;
-    text-align: center;
+.gameBoard {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playArea {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    /* add dimensions, background, etc. as necessary */
+    width: 50vw;
+    height: 50vh;
+    /* background: #EEE; */
+  }
+  
+
+.mainDeck{
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: rotate(90deg);
+    transform: translate(-50%, -50%);
+}
+
+.deck{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: rotate(90deg);
 }

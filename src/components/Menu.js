@@ -3,10 +3,11 @@ import '../styles/Menu.css';
 import { Link } from 'react-router-dom'
 import  Wallet  from './Wallet';
 import Board from './Board';
+import { GameContext } from './GameContext'; // Make sure the path is correct
 
 
 const Menu = () => {
-    const [playerCount, setPlayerCount] = useState(0);
+  const { playerCount, setPlayerCount } = React.useContext(GameContext);
 
     const handlePlayerCountChange = (e) => {
       setPlayerCount(Number(e.target.value));
@@ -16,7 +17,7 @@ const Menu = () => {
         if (playerCount > 0) {
           return (
             <button className='button'>
-              <Link to="/board">Start Game</Link>
+              <Link to={{ pathname: "/board", state: { playerCount } }}>Start Game</Link>
             </button>
           );
         } else {
@@ -38,8 +39,6 @@ const Menu = () => {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
         </select>
         <hr className='dividers' />
         {renderStartButton()}
