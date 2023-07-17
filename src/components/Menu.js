@@ -6,7 +6,6 @@ import Board from './Board';
 import { GameContext } from './GameContext'; // Make sure the path is correct
 
 
-
 const Menu = () => {
   const { playerCount, setPlayerCount } = React.useContext(GameContext);
 
