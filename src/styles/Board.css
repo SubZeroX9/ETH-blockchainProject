@@ -7,17 +7,36 @@
     align-items: center;
 }
 
+.doneButton{
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    width: 70px;
+    height: 70px;
+}
+
+.defenseCard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
 .playArea {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px;
+    align-items: center;
+    justify-items: center; 
     position: absolute;
     top: 50%;
     left: 45%;
     transform: translate(-50%, -50%);
-    /* add dimensions, background, etc. as necessary */
-    width: 50vw;
-    height: 50vh;
-    /* background: #EEE; */
-  }
-  
+    width: 40vw; 
+    height: 40vh; 
+}
+
 
 .mainDeck{
     position: absolute;

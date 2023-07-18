@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Card.css';
 
-const Card = ({ rank, suit, isFaceUp, index=1, depth=1 }) => {
+const Card = ({ rank, suit, isFaceUp, index, depth=1 ,onCardClick }) => {
 
     const getSuit = (suit) => {
         switch(suit) {
@@ -71,7 +71,8 @@ const Card = ({ rank, suit, isFaceUp, index=1, depth=1 }) => {
         <div 
             className={`card ${suit} ${isFaceCard ? `face-card-${rank}` : ''}`} 
             data-index={index}
-            style={{ transform: `translateZ(-${depth}em)` }} 
+            style={{ transform: `translateZ(-${depth}em)` }}
+            onClick={onCardClick}
         >
             {isFaceUp ? (
                 <>
