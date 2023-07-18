@@ -135,6 +135,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "buyTokens",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
@@ -428,11 +435,11 @@
 			]
 		},
 		"contracts/durakToken.sol": {
-			"keccak256": "0x2c63d6d71a32dd10da655015ca575d44adf92d7520377f7302bb884bbbafd1c7",
+			"keccak256": "0x99d672f296a86e5aa1c952b5b0b94834a779563dc7a24815fb7c4cf58aaf12c4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6e1c3dd6a732332ce883fb54aa34b97f942e5bc81321fed9c6e5f76594b47365",
-				"dweb:/ipfs/QmbSfwHNqpTw8ZDXUr9qPHxFEeuP755j6n58HeTRn9pKL4"
+				"bzz-raw://2937a15d9b03317c7ca6ebd212df9e7f42e8e40554ab6cd1cbfe51a4349fb75b",
+				"dweb:/ipfs/QmQHa6PVFH5uYvWYZGnifXYanmpNN8jyNm3re5bWdCVFfB"
 			]
 		}
 	},
