@@ -30,3 +30,19 @@ function shuffleDeck(deck) {
 
     return deck;
 }
+
+export const cardValue = (card) => {
+    switch (card.rank) {
+        case '6': return 6;
+        case '7': return 7;
+        case '8': return 8;
+        case '9': return 9;
+        case '10': return 10;
+        case 'J': return 11;
+        case 'Q': return 12;
+        case 'K': return 13;
+        case 'A': return 14;
+        default: return 0;
+    }
+  };
+  

@@ -1,0 +1,37 @@
+
+.player {
+    position: absolute;
+    transform: scale(75%)!important;
+}
+
+.player0{
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+}
+
+.player1{
+    left: -40%;
+    transform: translateY(-50%);
+    width: 100vw;
+}
+
+.player2 {
+    top: 0;
+    transform: translateX(50%);
+    width: 100vw;
+}
+
+.player3 {
+    right: -40%;
+    transform: translateY(-50%);
+    width: 100vw;
+}
+
+.player1 .hand {
+    transform: rotate(90deg);
+}
+
+.player3 .hand {
+    transform: rotate(-90deg);
+}

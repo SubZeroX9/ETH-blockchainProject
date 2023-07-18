@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import '../styles/Hand.css';
 
-const Hand = ({ initialCards, isFaceUp, isPlayerHand }) => {
-    const [cards, setCards] = useState(initialCards);
+const Hand = ({ hand, isFaceUp, isPlayerHand }) => {
+    const [cards, setCards] = useState(hand);
     const handClass = isPlayerHand ? 'hand player-hand' : 'hand';
+
+    useEffect(() => {
+        setCards(hand);
+    }, [hand]);  // Added dependencies
 
     const renderCards = () => {
         return cards.map((card, index) => (
