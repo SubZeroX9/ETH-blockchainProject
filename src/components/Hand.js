@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import '../styles/Hand.css';
 
-const Hand = ({ hand, isFaceUp, isPlayerHand }) => {
+const Hand = ({ hand, isFaceUp, isPlayerHand, onCardClick }) => {
     const [cards, setCards] = useState(hand);
     const handClass = isPlayerHand ? 'hand player-hand' : 'hand';
 
@@ -11,14 +11,15 @@ const Hand = ({ hand, isFaceUp, isPlayerHand }) => {
     }, [hand]);  // Added dependencies
 
     const renderCards = () => {
-        return cards.map((card, index) => (
+        return cards.filter(card => card!==null).map((card, index) => (
             <Card 
-                key={index}
+                key={`${card.rank}-${card.suit}`}
                 rank={card.rank} 
                 suit={card.suit} 
                 isFaceUp={isFaceUp}
                 index={index}
                 depth={cards.length - index}
+                onCardClick={() => onCardClick(card)}
             />
         ));
     }

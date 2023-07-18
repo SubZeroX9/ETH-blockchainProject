@@ -33,6 +33,8 @@ export const getFirstAttacker = (players, kuzarSuit) => {
         startingPlayer = player;
       }
     });
-  
+    if(!startingPlayer)
+      startingPlayer = players[0];
+      
     return startingPlayer.id;
   };
