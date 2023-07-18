@@ -17,4 +17,10 @@ contract durakToken is ERC20 {
         require(msg.sender == owner, "Only the owner can mint tokens");
         _mint(owner, amount);
     }
+
+    function buyTokens() public payable {
+        require(msg.value > 0, "You need to send some Ether");
+        uint256 tokensToBuy = msg.value * 1000; // 1 ETH = 1000 DURAK
+        _mint(msg.sender, tokensToBuy);
+    }
 }
