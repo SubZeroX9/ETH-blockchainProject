@@ -43,7 +43,7 @@ const Menu = () => {
         <hr className='dividers' />
         {renderStartButton()}
         <hr className='dividers' />
-        <a>No. of tokens</a>
+        <a>No. of tokens </a>
       </div>
     );
   };

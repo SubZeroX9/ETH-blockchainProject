@@ -3,10 +3,12 @@ import '../styles/Wallet.css'
 import React,{useState} from "react";
 
 
+
 const Wallet = () =>{
 
     const [defaultAccount,setDefaultAccount] = useState(null);
     const [currentContractVal, setCurrentContractVal] = useState(null);
+    
 
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
