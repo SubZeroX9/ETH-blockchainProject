@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/durak-game/static/css/main.b003fc58.css",
+    "main.js": "/durak-game/static/js/main.bc750750.js",
+    "static/js/787.ebd74743.chunk.js": "/durak-game/static/js/787.ebd74743.chunk.js",
+    "static/media/Playing Card Back Durak.png": "/durak-game/static/media/Playing Card Back Durak.52373a93e5d91008094f.png",
+    "static/media/RedQueen.png": "/durak-game/static/media/RedQueen.c5ee9a2cc5b6db7ea83f.png",
+    "static/media/RedKing.png": "/durak-game/static/media/RedKing.8182529365445752c6dc.png",
+    "static/media/RedJack.png": "/durak-game/static/media/RedJack.b5315f025dbbe88b73ad.png",
+    "static/media/BlackQueen.png": "/durak-game/static/media/BlackQueen.a78f4778bd2edd1c0950.png",
+    "static/media/BlackJack.png": "/durak-game/static/media/BlackJack.1fbd61577f7d128c25fb.png",
+    "static/media/BlackKing.png": "/durak-game/static/media/BlackKing.ca82d551a7d9688b05a0.png",
+    "static/media/menuBackground.jpg": "/durak-game/static/media/menuBackground.262d35b2a37adb25e727.jpg",
+    "index.html": "/durak-game/index.html",
+    "main.b003fc58.css.map": "/durak-game/static/css/main.b003fc58.css.map",
+    "main.bc750750.js.map": "/durak-game/static/js/main.bc750750.js.map",
+    "787.ebd74743.chunk.js.map": "/durak-game/static/js/787.ebd74743.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b003fc58.css",
+    "static/js/main.bc750750.js"
+  ]
+}
