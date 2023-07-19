@@ -2,10 +2,11 @@ import React, {useState,useEffect} from 'react'
 import '../styles/Menu.css';
 import { Link } from 'react-router-dom'
 import Board from './Board';
-import { GameContext } from './GameContext'; // Make sure the path is correct
+import { GameContext } from './GameContext'; 
 import { ethers } from 'ethers';
 import durakGameabi from '../ABIs/durakGameABI.json';
 import durakTokenabi from '../ABIs/durakTokenABI.json';
+
 
 const Menu = () => {
   const { playerCount, setPlayerCount } = React.useContext(GameContext);
@@ -17,9 +18,11 @@ const Menu = () => {
   const [durakTokenContract, setDurakTokenContract] = useState(null);
   const [durakGameContract, setDurakGameContract] = useState(null);
   const [tokenBalance, setTokenBalance] = useState(null);
+  let [decimals, setDecimals] = useState(null);
+  let [depositedAmount, setDepositedAmount] = useState(0);
 
-  const contractAddressDurakTokens = "0x4Ebc063Bff53f96E9Cc2Ba0Cf04EA8b27a432aE8";
-  const contractAddressDurakGame = "0xCe028B2ba0fe2F68AACc3828DD97239a28FccB7A";
+  const contractAddressDurakTokens = "0x996b0fBBE26b9C7Ce3Cf3A2955aa4f19Cb036AF5";
+  const contractAddressDurakGame = "0xEd336552424C30Dc0d8d6f793A0fBb5e7D1fa356";
 
   useEffect(() => {
       if (durakTokenContract) {
@@ -58,12 +61,14 @@ const Menu = () => {
 
       const durakGameContract = new ethers.Contract(contractAddressDurakGame, durakGameabi, signer);
       setDurakGameContract(durakGameContract);
+      const decimals = await durakTokeContract.decimals();
+      setDecimals(decimals);
   };
 
   const getMyBalance = async () => {
       let balance = await durakTokenContract.balanceOf(defaultAccount);
-      let decimals = await durakTokenContract.decimals();
-      balance = balance / (10n ** decimals);
+      balance = ethers.formatUnits(balance, decimals);
+
       setTokenBalance(balance.toString());
   };
 
@@ -79,7 +84,6 @@ const Menu = () => {
     }
     let amount = tokensToBuy/10000;
 
-    let decimals = await durakTokenContract.decimals();
     let parsedAmount = ethers.parseUnits(amount.toString(), decimals);
     try {
         let transactionResponse = await durakTokenContract.buyTokens({
@@ -98,20 +102,13 @@ const Menu = () => {
     setPlayerCount(Number(e.target.value));
   };
 
+
   const handleStartGame = async () => {
+    const GameContract = new ethers.Contract(contractAddressDurakGame, durakGameabi, signer);
+
     try {
-      // Set an allowance for the game contract
-      await setAllowance(); 
-
-      // Specify the amount of tokens to be transferred
-      const decimals = await durakTokenContract.decimals();
-      const amountForTenTokens = ethers.parseUnits('100', decimals);
-
-      // Transfer the tokens from the user's account to the game contract
-      await durakTokenContract.transfer( contractAddressDurakGame, amountForTenTokens);
-
       // Start the game
-      let transactionResponse = await durakGameContract.startGame();
+      let transactionResponse = await GameContract.startGame();
       let transactionResult = await transactionResponse.wait();
       console.log(transactionResult);
       
@@ -123,23 +120,11 @@ const Menu = () => {
     }
 };
 
-const setAllowance = async () => {
-  try {
-      const decimals = await durakTokenContract.decimals();
-      const amountForTenTokens = ethers.parseUnits('100', decimals); // Adjust this as per your game's requirement
 
-      const tx = await durakTokenContract.increaseAllowance(contractAddressDurakGame, amountForTenTokens);
-      await tx.wait();
-      console.log("Allowance set successfully");
-  } catch (error) {
-      console.error("Error setting allowance: ", error);
-  }
-};
 
 const transferTokens = async () => {
   let recipient = "0x66d6B8CBB15AcE8CEb3b9b2cBdC5D14323f98936"
   try {
-      const decimals = await durakTokenContract.decimals();
       const amountForTenTokens = ethers.parseUnits('100', decimals); // Adjust this as per your game's requirement
 
       const tx = await durakTokenContract.transfer(recipient, amountForTenTokens);
@@ -150,32 +135,67 @@ const transferTokens = async () => {
   }
 };
 
-const renderStartButton = () => {
-    if (playerCount > 0 && gameStarted) {
-        return (
-            <button className='button'>
-                <Link to={{ pathname: "/board", state: { playerCount } }}>Start Game</Link>
-            </button>
-        );
-    } else if (playerCount > 0) {
-        return (
-            <button className='button' onClick={handleStartGame}>
-                Deduct Tokens and Start
-            </button>
-        );
-    } else {
-        return (
-            <button className='button' onClick={() => alert('Add minimum players')}>
-                Start Game
-            </button>
-        );
+const fetchDepositedAmount = async () => {
+  try {
+      const depositedAmount = await durakGameContract.getDeposit();
+      const readableAmount = ethers.formatUnits(depositedAmount, decimals);
+      setDepositedAmount(readableAmount);
+      console.log('Deposited amount for user:', readableAmount);
+  } catch (error) {
+      console.error('Error fetching deposited amount:', error);
+  }
+};
+
+useEffect(() => {
+  if (decimals)
+    fetchDepositedAmount();
+},[decimals]);
+
+
+  const renderStartButton = () => {
+      if (playerCount > 0 && gameStarted) {
+          return (
+              <button className='button'>
+                  <Link to={{ pathname: "/board", state: { playerCount  } }}>Start Game</Link>
+              </button>
+          );
+      } else if (playerCount > 0) {
+          return (
+              <button className='button' onClick={handleStartGame}>
+                  Deduct Tokens and Start
+              </button>
+          );
+      } else {
+          return (
+              <button className='button' onClick={() => alert('Add minimum players')}>
+                  Start Game
+              </button>
+          );
+      }
+  };
+
+  const handleDepositTokens = async () => {
+    try {
+        const amountToDeposit = ethers.parseEther('10000'); 
+        // First, approve the game contract to move the tokens on behalf of the user
+        const approveTx = await durakTokenContract.approve(contractAddressDurakGame, amountToDeposit);
+        await approveTx.wait();
+        console.log('Approval successful.');
+
+        // Now, call the depositTokens function on the durakGame contract
+        const depositTx = await durakGameContract.depositTokens(amountToDeposit);
+        await depositTx.wait();
+        console.log('Tokens deposited successfully!');
+        fetchDepositedAmount();
+    } catch (error) {
+        console.error('Error during deposit:', error);
     }
 };
 
 
-      const handleTokenAmountChange = (e) => {
-          setTokensToBuy(Number(e.target.value));
-      };
+  const handleTokenAmountChange = (e) => {
+      setTokensToBuy(Number(e.target.value));
+  };
   
     return (
       <div className="Menu">
@@ -200,6 +220,9 @@ const renderStartButton = () => {
         </select>
     </div>)}
         <hr className='dividers' />
+        <button className="button" onClick={handleDepositTokens}>Deposite</button>
+        <div>Deposited Amount: {depositedAmount}</div>
+        <hr className='dividers' />
         <a>How Many Players</a>
         <select className='select' onChange={handlePlayerCountChange}>
           <option value="0" className='selected'>→ Select ←</option>
@@ -208,7 +231,7 @@ const renderStartButton = () => {
           <option value="4" className='selected'>4</option>
         </select>
         <hr className='dividers' />
-        <button className="button" onClick={transferTokens}>Transfer Tokens</button>
+        {/* <button className="button" onClick={transferTokens}>Transfer Tokens</button> */}
         {renderStartButton()}<br></br><br></br>
       </div>
     );

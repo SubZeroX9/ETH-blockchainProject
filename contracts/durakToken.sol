@@ -25,8 +25,8 @@ contract durakToken is ERC20 {
         minters[owner] = true; // by default, owner is a minter
     }
 
-    function addMinter(address minter) external onlyOwner {
-        minters[minter] = true;
+    function addGameContractAsMinter(address gameContract) external onlyOwner {
+        minters[gameContract] = true;
     }
 
     function removeMinter(address minter) external onlyOwner {
@@ -34,7 +34,7 @@ contract durakToken is ERC20 {
     }
 
     function mintTokens(uint256 amount) external onlyMinter {
-        _mint(msg.sender, amount);
+        _mint(address(this), amount);
     }
 
     function buyTokens() public payable {
@@ -43,4 +43,4 @@ contract durakToken is ERC20 {
         _mint(msg.sender, tokensToBuy);
     }
 }
-//0x4Ebc063Bff53f96E9Cc2Ba0Cf04EA8b27a432aE8
+//0x996b0fBBE26b9C7Ce3Cf3A2955aa4f19Cb036AF5

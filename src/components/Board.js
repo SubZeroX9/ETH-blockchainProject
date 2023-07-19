@@ -10,6 +10,9 @@ import Deck from './Deck';
 import '../styles/Board.css';
 import { chooseFirstCardToAttackWith, chooseCardToAttackWith,chooseCardToDefendWith,isCardValidToAttackWith,isCardValidToDefendWith } from '../utils/aiLogic';
 import { useNavigate } from 'react-router-dom';
+import durakGameabi from '../ABIs/durakGameABI.json';
+import { ethers } from 'ethers';
+
 
 
 
@@ -30,6 +33,11 @@ const Board = () => {
   const isKuzarDealt = useRef(false);
   const [canPlay,setCanPlay] = useState([]);
   let cardPlayed = useRef(false);
+  const [durakContract, setDurakContract] = useState(null);
+
+  const contractAddressDurakTokens = "0x996b0fBBE26b9C7Ce3Cf3A2955aa4f19Cb036AF5";
+  const contractAddressDurakGame = "0xEd336552424C30Dc0d8d6f793A0fBb5e7D1fa356";
+  
   // let isDefenseSuccessful = useRef(false);
 
     // Setup the game with initial values
@@ -149,18 +157,48 @@ const Board = () => {
       }
     }
 
-    const GameOverWinner = (winner) => {
-      console.log("game over winner")
-      console.log(winner)
-      alert("Game Over! You win!");
-      moveToManu();
+    const GameOverWinner = async () => {
+      console.log("game over winner");
+      try {
+        const tx = await durakContract.endGame(true);
+        const trx_resp = await tx.wait();
+
+        console.log('Transaction hash:', trx_resp.transactionHash);
+        console.log("You were Rewarded!")
+        alert("Game Over! You win!");
+        moveToManu();
+      } catch (error) {
+          console.error('Error fetching deposited amount:', error);
+      }
     }
 
-    const GameOverLoser = () => {
+    const GameOverLoser = async () => {
       console.log("game over sorry you didnt win")
-      alert("Game Over! You didnt win!");
-      moveToManu();
+      try {
+        const tx = await durakContract.endGame(false);
+        const trx_resp = await tx.wait();
+
+        console.log('Transaction hash:', trx_resp.transactionHash);
+        console.log("You didnt get anything!")
+        alert("Game Over! You didnt win!");
+        moveToManu();
+      } catch (error) {
+          console.error('Error fetching deposited amount:', error);
+      }
     }
+
+    useEffect(() => {
+      getContract();
+    },[]);
+
+    const getContract = async () => {
+      let tempProvider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await tempProvider.getSigner();
+      const durakGameContract = new ethers.Contract(contractAddressDurakGame, durakGameabi, signer);
+      setDurakContract(durakGameContract);
+    }
+
+    
 
     const moveToManu = () => {
       navigate('/');
