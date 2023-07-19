@@ -153,11 +153,13 @@ const Board = () => {
       console.log("game over winner")
       console.log(winner)
       alert("Game Over! You win!");
+      moveToManu();
     }
 
     const GameOverLoser = () => {
       console.log("game over sorry you didnt win")
       alert("Game Over! You didnt win!");
+      moveToManu();
     }
 
     const moveToManu = () => {
