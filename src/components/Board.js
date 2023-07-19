@@ -421,7 +421,7 @@ const Board = () => {
 
   return (
     <div className='gameBoard'>
-      {isHumanTurn && <button onClick={handleDoneClick} className='doneButton'>Done</button>}
+      {isHumanTurn && <button className='button1' onClick={handleDoneClick} >Done</button>}
       { players.map(player => (
         <Player 
           key={player.id} 
@@ -430,6 +430,12 @@ const Board = () => {
           onCardClick={handleCardClick}
         />
       ))}
+      <button className='buttonWin' onClick={GameOverWinner}>
+        Win
+      </button>
+      <button className='buttonLose' onClick={GameOverLoser}>
+        Lose
+      </button>
       <div className='mainDeck'>
         { deckState.kuzar && 
           <Card 

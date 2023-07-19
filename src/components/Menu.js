@@ -35,15 +35,13 @@ const Menu = () => {
         <hr className='dividers' />
         <a>How Many Players</a>
         <select className='select' onChange={handlePlayerCountChange}>
-          <option value="0">→ Select ←</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <option value="0" className='selected'>→ Select ←</option>
+          <option value="2" className='selected'>2</option>
+          <option value="3" className='selected'>3</option>
+          <option value="4" className='selected'>4</option>
         </select>
         <hr className='dividers' />
-        {renderStartButton()}
-        <hr className='dividers' />
-        <a>No. of tokens: </a>
+        {renderStartButton()}<br></br><br></br>
       </div>
     );
   };

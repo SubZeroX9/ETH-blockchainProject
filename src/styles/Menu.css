@@ -7,11 +7,12 @@ body{
     align-items: center;
     align-content: center;
     text-align: center;
+    row-gap: 20px
 }
 
 .Menu{
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-family: Lucida Handwriting ;
     text-shadow: 2px 2px 10px green;
     font-weight: bold;
@@ -21,7 +22,7 @@ body{
 .tab{
     tab-size:20;
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-family: Lucida Handwriting ;
     text-shadow: 2px 2px 10px green;
     font-weight: bold;
@@ -39,10 +40,10 @@ body{
     text-align: center;
     color: white;
     text-shadow: 2px 2px 10px green;
-    font-size: 60px;
+    font-size: 50px;
     font-family: Lucida Handwriting ;
     font-weight: bold;
-    padding: 10px 40px 10px 40px;
+    padding: 20px 40px 20px 40px;
 }
 
 .selected{
@@ -50,7 +51,7 @@ body{
     background-color: black;
     text-align: center;
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-family: Lucida Handwriting ;
     font-weight: bold;
 }
@@ -62,7 +63,7 @@ body{
     text-align: center;
     color: white;
     text-shadow: 2px 2px 10px green;
-    font-size: 60px;
+    font-size: 50px;
     font-family: Lucida Handwriting ;
     font-weight: bold;
     padding: 20px 40px 20px 40px;

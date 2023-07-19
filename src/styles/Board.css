@@ -7,14 +7,6 @@
     align-items: center;
 }
 
-.doneButton{
-    position: absolute;
-    bottom: 10%;
-    right: 10%;
-    width: 70px;
-    height: 70px;
-}
-
 .defenseCard{
     position: absolute;
     top: 50%;
@@ -51,4 +43,59 @@
     top: 30%;
     left: 50%;
     transform: rotate(90deg);
+}
+
+
+.button1 {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 30%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+  .buttonWin {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+  .buttonLose {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 20%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+
+  .Text{
+    color: white;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    text-shadow: 2px 2px 10px green;
+    font-weight: bold;
 }
