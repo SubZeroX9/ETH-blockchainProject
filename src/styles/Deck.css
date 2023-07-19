@@ -1,0 +1,19 @@
+.deck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 120px;
+    position: relative;
+    perspective: 1000px; /* Change the value to see how perspective works */
+    perspective-origin: center right;
+}
+
+
+.deck .card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate3d(var(--index, 0)px, var(--index, 0)px, 0);
+    transition: transform .3s;
+}

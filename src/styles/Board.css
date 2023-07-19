@@ -1,0 +1,101 @@
+.gameBoard {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.defenseCard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.playArea {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px;
+    align-items: center;
+    justify-items: center; 
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 40vw; 
+    height: 40vh; 
+}
+
+
+.mainDeck{
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: rotate(90deg);
+    transform: translate(-50%, -50%);
+}
+
+.deck{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: rotate(90deg);
+}
+
+
+.button1 {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 30%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+  .buttonWin {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+  .buttonLose {
+    background-color: transparent;
+    text-align: start;
+    color: white;
+    text-shadow: 2px 2px 10px green;
+    font-size: 30px;
+    font-family: Lucida Handwriting ;
+    font-weight: bold;
+    padding: 20px 40px 20px 40px;
+    position: absolute;
+    bottom: 20%;
+    right: 15%;
+    width: 150px;
+    height: 70px;
+  }
+
+  .Text{
+    color: white;
+    font-size: 60px;
+    font-family: Lucida Handwriting ;
+    text-shadow: 2px 2px 10px green;
+    font-weight: bold;
+}
