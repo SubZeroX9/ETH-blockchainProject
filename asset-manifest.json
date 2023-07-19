@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/durak-game/static/css/main.b003fc58.css",
-    "main.js": "/durak-game/static/js/main.bc750750.js",
+    "main.js": "/durak-game/static/js/main.b19e8ef3.js",
     "static/js/787.ebd74743.chunk.js": "/durak-game/static/js/787.ebd74743.chunk.js",
     "static/media/Playing Card Back Durak.png": "/durak-game/static/media/Playing Card Back Durak.52373a93e5d91008094f.png",
     "static/media/RedQueen.png": "/durak-game/static/media/RedQueen.c5ee9a2cc5b6db7ea83f.png",
@@ -13,11 +13,11 @@
     "static/media/menuBackground.jpg": "/durak-game/static/media/menuBackground.262d35b2a37adb25e727.jpg",
     "index.html": "/durak-game/index.html",
     "main.b003fc58.css.map": "/durak-game/static/css/main.b003fc58.css.map",
-    "main.bc750750.js.map": "/durak-game/static/js/main.bc750750.js.map",
+    "main.b19e8ef3.js.map": "/durak-game/static/js/main.b19e8ef3.js.map",
     "787.ebd74743.chunk.js.map": "/durak-game/static/js/787.ebd74743.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b003fc58.css",
-    "static/js/main.bc750750.js"
+    "static/js/main.b19e8ef3.js"
   ]
 }
