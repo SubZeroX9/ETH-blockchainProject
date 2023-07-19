@@ -1,76 +1,80 @@
-# Durak Game
+# Durak Game on Ethereum 🎴💰
 
-A card game project developed with React, simulating the classic Russian card game Durak With The use of ETH blockchain test Network and implmentation of smart contract. Now hosted on GitHub Pages!
-https://subzerox9.github.io/durak-game/
+A next-gen adaptation of the classic Russian card game, Durak. Crafted with React and extended to the decentralized realm with Ethereum's blockchain test network and smart contract implementations.
+
+🚀 Live Here: [Durak Ethereum Game](https://subzerox9.github.io/durak-game/)
 
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Deployment](#deployment)
-3. [Usage](#usage)
-4. [Features](#features)
-5. [Contributing](#contributing)
-6. [License](#license)
+2. [Blockchain Setup](#blockchain-setup)
+3. [Deployment](#deployment)
+4. [Usage](#usage)
+5. [Features](#features)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Installation
 
-Before starting, make sure you have Node.js and npm installed on your computer.
+```bash
+# Ensure you have Node.js and npm:
+node -v && npm -v
 
-To install the project:
+# Clone the repository:
+git clone https://github.com/SubZeroX9/durak-game.git
 
-1. Clone the repository:
-   git clone https://github.com/SubZeroX9/durak-game.git
+# Navigate to the project directory:
+cd durak-game
 
-2. Install the project dependencies:
-   cd durak-card-game
-   npm install
+# Install the project dependencies:
+npm install
+
+```
+
+## Blockchain Setup
+
+# Ensure you have MetaMask installed for in-browser blockchain interactions.
+
+# Connect to the Ethereum test network of your choice.
+
+# Interact with the deployed contracts via the game's interface.
 
 ## Deployment
 
-To deploy the game to GitHub Pages:
+# Install gh-pages package for deployment:
 
-1. Install the `gh-pages` package:
-   npm install gh-pages --save-dev
+npm install gh-pages --save-dev
 
-2. Add the `homepage` field in your `package.json`:
-   "homepage": "http://<your-github-username>.github.io/durak-game"
+# Add the homepage to package.json (replace <your-github-username> with your actual GitHub username):
 
-3. Add the `predeploy` and `deploy` scripts in your `package.json` file:
-   "scripts": {
-   "start": "react-scripts start",
-   "predeploy": "npm run build",
-   "deploy": "gh-pages -d build",
-   "test": "react-scripts test",
-   "eject": "react-scripts eject"
-   }
+echo '"homepage": "http://<your-github-username>.github.io/durak-game",' >> package.json
 
-4. Push your changes to GitHub:
-   git add .
-   git commit -m "Setup for deployment to GitHub Pages"
-   git push
+# Push changes to GitHub:
 
-5. Run the deploy script:
-   npm run deploy
+git add .
+git commit -m "Prepared for GitHub Pages deployment"
+git push
 
-Now your game is available at `http://<your-github-username>.github.io/durak-game`
+# Deploy to GitHub Pages:
+
+npm run deploy
+
+# To run the game locally:
 
 ## Usage
 
-To run the game locally, use the following command:
 npm start
-
-This will start the local server. You can now play the game by going to `http://localhost:3000` in your browser.
 
 ## Features
 
-- Allows 2-6 players.
-- Customizable game rules.
-- Durak tokens system for scoring.
-- Interactive UI.
+2-6 player support.
+Game rule customization.
+Durak token scoring system.
+Intuitive UI.
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome. Feel free to check [issues page](https://github.com/username/durak-game/issues) if you want to contribute.
+Contributions, issues, and feature requests are welcome. For major changes, please open an issue first to discuss what you would like to change. See the [issues page](https://github.com/SubZeroX9/durak-game/issues) for more.
 
 ## License
 
