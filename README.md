@@ -13,6 +13,7 @@ A next-gen adaptation of the classic Russian card game, Durak. Crafted with Reac
 5. [Features](#features)
 6. [Contributing](#contributing)
 7. [License](#license)
+8. [Authors](#Authors)
 
 ## Installation
 
@@ -79,3 +80,9 @@ Contributions, issues, and feature requests are welcome. For major changes, plea
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Authors
+
+--Yahalomit Levi Vaizman
+--Nisan Fichman
+--Rafael Azriaiev
