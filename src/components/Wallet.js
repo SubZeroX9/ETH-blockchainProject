@@ -1,139 +1,103 @@
-import {ethers, providers} from 'ethers';
-import '../styles/Wallet.css'
-import React,{useEffect, useState} from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 import durakGameabi from '../ABIs/durakGameABI.json';
 import durakTokenabi from '../ABIs/durakTokenABI.json';
 
+const WalletContext = createContext();
 
+export const useContract = () => {
+    return useContext(WalletContext);
+};
 
-const Wallet = () =>{
-
-    const [defaultAccount,setDefaultAccount] = useState(null);
-    const [currentContractVal, setCurrentContractVal] = useState(null);
-    
-
+export const WalletProvider = ({ children }) => {
+    const [defaultAccount, setDefaultAccount] = useState(null);
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
-    const [contract, setContract] = useState(null);
+    const [durkaTokenContract, setDurakTokenContract] = useState(null);
+    const [durkaGameContract, setDurakGameContract] = useState(null);
     const [tokenBalance, setTokenBalance] = useState(null);
 
-    const contractAddressDurakTokens = "0xfA82D868D6aF3B64c54954C4aFe72373090c6d5e";
-
-    const contractAddressDurakGame = "0x5f13a20fC75FbfA0258221e8c51Def53F9bB8e18";
+    const contractAddressDurakTokens = "0x4Ebc063Bff53f96E9Cc2Ba0Cf04EA8b27a432aE8";
+    const contractAddressDurakGame = "0xCe028B2ba0fe2F68AACc3828DD97239a28FccB7A";
 
     useEffect(() => {
-        if (contract) {
+        if (durkaTokenContract) {
             getMyBalance();
         }
-    }, [contract]);
+    }, [durkaTokenContract]);
 
-    const connectWalletHandler = () =>{
-        if(window.ethereum){
-            window.ethereum.request({method: 'eth_requestAccounts'})
-            .then(result => {
-                accountChangeHandler(result[0]);
-            })
-        } else{
+    const connectWalletHandler = () => {
+        if (window.ethereum) {
+            window.ethereum.request({ method: 'eth_requestAccounts' })
+                .then(result => {
+                    accountChangeHandler(result[0]);
+                })
+        } else {
             alert("Need to install MetaMask!");
         }
-    }
+    };
 
     const accountChangeHandler = (newAccount) => {
         setDefaultAccount(newAccount);
         updateEthers();
-    }
+    };
 
-    const updateEthers = async() => {
-        let tempProvider = new ethers.BrowserProvider(window.ethereum)
+    const updateEthers = async () => {
+        let tempProvider = new ethers.BrowserProvider(window.ethereum);
         setProvider(tempProvider);
 
         const signer = await tempProvider.getSigner();
         setSigner(signer);
 
         const erc20Contract = new ethers.Contract(contractAddressDurakTokens, durakTokenabi, signer);
-        setContract(erc20Contract);
-        const tokenName = erc20Contract.name();
-        console.log(tokenName);
-        const tokenSymbol = erc20Contract.symbol();
-        console.log(tokenSymbol);
-        const totalSupply = erc20Contract.totalSupply();
-        console.log(totalSupply);
-    }
+        setDurakTokenContract(erc20Contract);
+        const tokenName = await erc20Contract.name();
+        const tokenSymbol = await erc20Contract.symbol();
+        const totalSupply = await erc20Contract.totalSupply();
+
+        const durakGameContract = new ethers.Contract(contractAddressDurakGame, durakGameabi, signer);
+        setDurakGameContract(durakGameContract);
+    };
 
     const getMyBalance = async () => {
-        let balance = await contract.balanceOf(defaultAccount);
-        let decimals = await contract.decimals();
-        balance = balance / (10n ** decimals);
+        let balance = await durkaTokenContract.balanceOf(defaultAccount);
+        let decimals = await durkaTokenContract.decimals();
+        balance = balance / (10 ** decimals);
         setTokenBalance(balance.toString());
-    }
+    };
 
-    const buyTokens = async () => {
-        // const erc20 = new ethers.Contract(contractAddressDurakTokens, durakTokenabi, signer);
-        let amount = 0.2;
-        const decimals = await contract.decimals();
+    const buyTokens = async (amount ) => {
+        const decimals = await durkaTokenContract.decimals();
+        // let amount = ethers.utils.parseUnits("0.2", decimals);
+        // i recive token amount exchange to wei
+        let parsedAmount = ethers.utils.parseUnits(amount.toString(), decimals);
         try {
-            let durakAmount = ethers.parseUnits(amount.toString(), decimals);
-            // Invoke the transfer function
-            // let transactionResponse = await contract.buyTokens(durakAmount.toString());
-            let transactionResponse = await contract.buyTokens({
-                value: durakAmount
+            let transactionResponse = await durkaTokenContract.buyTokens({
+                value: parsedAmount
             });
-    
-            // Wait for the transaction to be processed
+
             let transactionResult = await transactionResponse.wait();
-    
             console.log(transactionResult);
         } catch (error) {
             console.error("An error occurred", error);
+            alert("not enough funds");
         }
-    }
+    };
 
-    const transferTokens = async () => {
-        // const erc20 = new ethers.Contract(contractAddressDurakTokens, durakTokenabi, signer);
-        let recipientAddr = "0x48727262f4083966317abE1539B1bdfDAbA562D7"
-        let amount = 100n;
-        const decimals = await contract.decimals();
-        try {
-            let durakAmount = ethers.parseUnits(amount.toString(), decimals);
-            // Invoke the transfer function
-            let transactionResponse = await contract.transfer(recipientAddr, durakAmount.toString());
-    
-            // Wait for the transaction to be processed
-            let transactionResult = await transactionResponse.wait();
-    
-            console.log(transactionResult);
-        } catch (error) {
-            console.error("An error occurred", error);
-        }
+    // You can add more functions like transferTokens, etc.
 
+    const value = {
+        defaultAccount,
+        provider,
+        signer,
+        connectWalletHandler,
+        durkaTokenContract,
+        durkaGameContract,
+        buyTokens,
+        tokenBalance,
+    };
 
-    }
+    return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
+};
 
-
-    return <>
-    <br></br>{defaultAccount === null ? 
-    (<button className="button" onClick={connectWalletHandler}>Connect Wallet</button>) 
-    : (<div>
-        Address: {defaultAccount}
-        <br />
-        <hr className='dividers' />
-        Token balance: {tokenBalance || 'Loading...'}
-        <hr className='dividers' />
-        <button className="button" onClick={buyTokens}>Buy Tokens</button>
-        <select className='select' defaultChecked='50'>
-          <option value="0" className='selected'>→ Select Amount←</option>
-          <option value="2" className='selected'>50</option>
-          <option value="3" className='selected'>100</option>
-          <option value="4" className='selected'>150</option>
-          <option value="3" className='selected'>200</option>
-          <option value="4" className='selected'>250</option>
-          <option value="3" className='selected'>100</option>
-          <option value="4" className='selected'>300</option>
-        </select>
-        <hr className='dividers' />
-        <button className="button" onClick={transferTokens}>Transfer Tokens</button>
-    </div>)}
-</>
-}
-
-export default Wallet;
+export default WalletProvider;

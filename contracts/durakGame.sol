@@ -13,27 +13,37 @@ contract durakGame {
     }
 
     function startGame() public {
-        uint256 cost = 10 * (10 ** tokenContract.decimals()); // Cost of a game is 10 tokens
-        tokenContract.transferFrom(msg.sender, address(this), cost); // Transfer the cost from the player to the contract
-        currentGame[msg.sender] = true; // Set the game as started for the user
+        uint256 cost = 10 * (10 ** tokenContract.decimals());
+        tokenContract.transferFrom(msg.sender, address(this), cost);
+        currentGame[msg.sender] = true;
+        tokenContract.addMinter(msg.sender); // Add the player as a minter
     }
 
-    // This function should be called by the logic that determines if the user has won
     function endGame(bool won) public {
-        require(currentGame[msg.sender] == true, "You need to start a game first");
-        currentGame[msg.sender] = false; // Set the game as ended for the user
+        require(currentGame[msg.sender], "You need to start a game first");
+        currentGame[msg.sender] = false;
+
         if (won) {
-            uint256 reward = 12 * (10 ** tokenContract.decimals()); // Winning yields 12 tokens (original 10 + 20%)
-            tokenContract.transfer(msg.sender, reward); // Transfer the reward from the contract to the player
-            lastGameResult[msg.sender] = reward; // Save the last game result
+            uint256 reward = 12 * (10 ** tokenContract.decimals());
+            uint256 contractBalance = tokenContract.balanceOf(address(this));
+
+            if (contractBalance < reward) {
+                uint256 amountToMint = reward - contractBalance;
+                tokenContract.mintTokens(amountToMint);
+            }
+
+            tokenContract.transfer(msg.sender, reward);
+            lastGameResult[msg.sender] = reward;
         } else {
-            lastGameResult[msg.sender] = 0; // Save the last game result
+            lastGameResult[msg.sender] = 0;
         }
+
+        tokenContract.removeMinter(msg.sender); // Remove the player as a minter
     }
 
-    // This function is just for demonstrative purposes
-    // In a real-world scenario, you should have a secure way to generate random outcomes or use a provably fair system
     function simulateGame() public {
         endGame((block.timestamp % 2) == 0); // 50% chances of winning
     }
 }
+
+//0xCe028B2ba0fe2F68AACc3828DD97239a28FccB7A

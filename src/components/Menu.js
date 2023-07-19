@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import '../styles/Menu.css';
 import { Link } from 'react-router-dom'
-import  Wallet  from './Wallet';
 import Board from './Board';
 import { GameContext } from './GameContext'; // Make sure the path is correct
 
@@ -31,7 +30,26 @@ const Menu = () => {
   
     return (
       <div className="Menu">
-        <Wallet />
+        <br></br>{defaultAccount === null ? 
+    (<button className="button" onClick={connectWalletHandler}>Connect Wallet</button>) 
+    : (<div>
+        Address: {defaultAccount}
+        <br />
+        <hr className='dividers' />
+        Token balance: {tokenBalance || 'Loading...'}
+        <hr className='dividers' />
+        <button className="button" onClick={buyTokens}>Buy Tokens</button>
+        <select className='select' defaultChecked='50'>
+          <option value="0" className='selected'>→ Select Amount←</option>
+          <option value="2" className='selected'>50</option>
+          <option value="3" className='selected'>100</option>
+          <option value="4" className='selected'>150</option>
+          <option value="3" className='selected'>200</option>
+          <option value="4" className='selected'>250</option>
+          <option value="3" className='selected'>100</option>
+          <option value="4" className='selected'>300</option>
+        </select>
+    </div>)}
         <hr className='dividers' />
         <a>How Many Players</a>
         <select className='select' onChange={handlePlayerCountChange}>
